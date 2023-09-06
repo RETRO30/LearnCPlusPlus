@@ -21,11 +21,11 @@ class Expression {
         }
 
         char getTree() {
-            return " ";
+            return '';
         }
 
         Symbol getSymbols() {
-            return ''
+            return Symbol;
         }
 
 };
