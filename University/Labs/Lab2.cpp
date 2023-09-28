@@ -1,15 +1,11 @@
 #include <iostream>
+#include <string>
 
 int main(){
-    unsigned short int i;
-    unsigned short int j;
-    unsigned short int bit_i;
-    unsigned short int bit_j;
-    unsigned char rotate;
-    unsigned char reverse;
-    unsigned char transp_i_to_j;
-    unsigned char tmp;
-
+    unsigned short int i, j;
+    unsigned short int bit_i, bit_j;
+    unsigned char rotate, reverse, transp_i_to_j;
+    
     //unsigned char X = 7;
     // 7 = 00000111
     unsigned char X = 98; 
@@ -26,8 +22,9 @@ int main(){
     // Значение i-ого элемента
     bit_i = ((X >> i) % 2);
 
-    // Инверсия
-    reverse = ~X;
+    
+    //Инверсия
+    reverse = X ^ (char)255;
 
     // Поменять биты местами
     bit_j = (X >> j) & 1;
@@ -35,7 +32,7 @@ int main(){
     transp_i_to_j ^= (bit_i << i) ^ (bit_j << j);
 
     // Перевернуть битовую цепочку
-    tmp = X;
+    unsigned char tmp = X;
     for (int i = 0; i < 8; i++) {
         rotate = (rotate << 1) | (tmp & 1);
         tmp >>= 1;
