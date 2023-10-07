@@ -36,8 +36,8 @@
         std::cout << "Is the square" << std::endl;
         break;
     case (16):
-            std::cout << "Is the square" << std::endl;
-            break;
+        std::cout << "Is the square" << std::endl;
+        break;
     case (25):
         std::cout << "Is the square" << std::endl;
         break;
