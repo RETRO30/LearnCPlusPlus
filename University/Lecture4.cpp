@@ -10,20 +10,20 @@ int main(){
     const int M = 100;
 
 
-    std::ifstream in("input.txt");
+    // std::ifstream in("input.txt");
 
-    if (!in.is_open())
-    {
-        std::cout << "Error open file";
-        return -1;
-    }
+    // if (!in.is_open())
+    // {
+    //     std::cout << "Error open file";
+    //     return -1;
+    // }
 
     int n, m;
     int matrix[N][M];
-    in >> n >> m;
+    std::cin >> n >> m;
     for (int i=0; i<n; i++){
         for (int j=0; j<m; j++){
-            in >> matrix[i][j];
+            std::cin >> matrix[i][j];
         }
     }
 

@@ -1,8 +1,4 @@
 #include <iostream>
-#include <cmath>
-#include <cstring>
-#include <cctype>
-
 
 // Вариант 7
 // Дана последовательность вещественных чисел {A1, A2, …, AN}. Найти произведение всех чисел из интервала [1; 12.45], наименьшее из таких чисел и его номер в последовательности.
@@ -15,7 +11,7 @@
 // Для пункта 2 вывести цифру, которая встречается больше всего раз. (Массивы не использовать)
 
 int main(){
-    // Пункт 1
+/*    // Пункт 1
     std::cout << "Task 1. Enter n and array after:\n";
     int n;
     std::cin >> n;
@@ -71,9 +67,10 @@ int main(){
         std::cout << "Result optional task 2: " << even_sum_ - odd_sum_ << "\n";
     }
     else {
-        std::cout << 0 << "\n";
+        result = 0;
+        std::cout << "Result task 1: " << result << "\n";
     }   
-
+*/
     //  Пункт 2
     long long int input_number;
     char min_numeral = 9, max_numeral = 0, maxcount_numeral;
@@ -83,7 +80,7 @@ int main(){
     char numeral, inner_numeral;
     char counter = 0, maxcount = 0;
     while (number) {
-        numeral = number % 10;
+        numeral = abs(number % 10);
         if (numeral < min_numeral) {
             min_numeral = numeral;
         }
@@ -93,16 +90,18 @@ int main(){
         number /= 10;
         // Доп 3
         while (number_for_count) {
-            inner_numeral = number_for_count % 10;
+            inner_numeral = abs(number_for_count % 10);
             if (inner_numeral == numeral) {
                 counter++;
             }
             number_for_count /= 10;
         }
-          
+        // std::cout << (int) counter << ' ' << (int) numeral << '\n';
         if (counter > maxcount) {
+            maxcount = counter;
             maxcount_numeral = numeral;
         }
+        counter = 0;
         number_for_count = input_number;
     }
 
