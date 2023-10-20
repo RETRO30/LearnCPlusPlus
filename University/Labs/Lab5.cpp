@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 
 // Вариант 7
 
@@ -25,8 +26,7 @@ int main(){
         sorted_array_[i] = array[i];
 
     }
-    
-    // Пункт 1.
+
     if (array[0] > array[n-1]){
         int tmp = 0;
         for (int i = 0; i < n - 1; i++){
@@ -186,5 +186,29 @@ int main(){
             std::cout << matrix[i][j] << ' '; 
         }
         std::cout << '\n';
+    }
+
+    // Доп 3.
+    int num;
+    std::cout << "Enter num:";
+    std::cin >> num;
+
+    int dividers[N];
+    int len_dividers = 0;
+    for (int i = 1; i <= std::sqrt(num); i++) {
+        if (num % i == 0) {
+            dividers[len_dividers] = i;
+            dividers[len_dividers+1] = num/i;
+            len_dividers += 2;
+        }
+    }
+    if (len_dividers == 2){
+        std::cout << "Is prime.";
+    }
+    else {
+        std::cout << "Is not prime: ";
+        for (int i = 0; i < len_dividers; i++){
+            std::cout << dividers[i] << " ";
+        }
     }
 }
