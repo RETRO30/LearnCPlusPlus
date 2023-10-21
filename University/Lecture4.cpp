@@ -20,7 +20,7 @@ int main(){
 
     int n, m;
     int matrix[N][M];
-    std::cin >> n >> m;
+    std::cin >> m >> n;
     for (int i=0; i<n; i++){
         for (int j=0; j<m; j++){
             std::cin >> matrix[i][j];
