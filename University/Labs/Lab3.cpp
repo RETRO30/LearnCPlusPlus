@@ -5,7 +5,7 @@
     // Пункт 1
     int A, B, C;
     std::cin >> A >> B >> C;
-    if (A > 0 && B > 0 && C && 0){
+    if (A > 0 && B > 0 && C > 0){
         if (A < B && B < C){
             std::cout << "A < B < C -> " << C << B << A << std::endl; 
         }
