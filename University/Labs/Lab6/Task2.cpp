@@ -23,7 +23,7 @@ int main() {
     const char alphabet[COUNT_LETTERS] = {'à', 'å', '¸', 'è', 'î', 'ó', 'ú', 'û', 'ü', 'ý', 'þ', 'ÿ',
                                          'á', 'â', 'ã', 'ä', 'æ', 'ç', 'é', 'ê', 'ë', 'ì',
                                             'í', 'ï', 'ð', 'ñ', 'ò', 'ô', 'õ', 'ö', '÷', 'ø', 'ù'};
-    char reg_delta = 'A'-'a';
+    char reg_delta = 'à' - 'À';
 
     std::ifstream input_file("assets/input.txt");
     std::ifstream text_file("assets/text.txt");
