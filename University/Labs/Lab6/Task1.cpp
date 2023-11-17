@@ -32,7 +32,7 @@ int main() {
     const char punctuation[count_punctuation] = {',', '.', '!', ':', ';', '?', '-'};
     char reg_delta = 'A'-'a'; 
 
-    char input_string[100] = "ƒана строка дл»ной не боле≈ 100 символќв.";
+    char input_string[100] = "ƒана строка дл»ной Ё не боле≈ 100 символќв.";
 
     std::cout << "¬ходна€ строка:\n" << input_string << '\n';
     
