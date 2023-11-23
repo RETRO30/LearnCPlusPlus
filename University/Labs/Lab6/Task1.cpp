@@ -17,7 +17,7 @@
 // 1. Дана строка длиной не более 100 символов. Заменить в ней все гласные буквы на «ё» в обратном регистре. Другие символы изменять не нужно.
 // 2. Дан файл, содержащий русский текст. Найти в тексте N (N ? 10) самых длинных слов, содержащих какую-либо букву три раза. 
 //     Записать найденные слова в текстовый файл в порядке не убывания длины. 
-//     Все найденные слова должны быть разными.
+//     Все найденные слова должны быть разными. 
 
 int main() {
 
@@ -25,14 +25,13 @@ int main() {
 
 
     // вспомогательные
-    const int count_volwes = 12, count_consontants = 21, count_punctuation = 7;
+    const int count_volwes = 12, count_consontants = 21;
     const char vowels[count_volwes] = {'а', 'е', 'ё', 'и', 'о', 'у', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'};
     const char consonants[count_consontants] = {'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м',
                            'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ'};
-    const char punctuation[count_punctuation] = {',', '.', '!', ':', ';', '?', '-'};
-    char reg_delta = 'A'-'a'; 
+    char reg_delta = 'А' - 'а'; 
 
-    char input_string[100] = "Дана строка длИной Э не болеЕ 100 символОв.";
+    char input_string[100] = "Дана строка длИной Э не бёЁлеЕ 100 символОв.";
 
     std::cout << "Входная строка:\n" << input_string << '\n';
     
@@ -46,7 +45,7 @@ int main() {
             if (input_string[i] == vowels[j]){
                 input_string[i] = 'Ё';
             }
-            else if (input_string[i] == (vowels[j]+reg_delta)) {
+            else if (input_string[i] == (vowels[j] + reg_delta) || input_string[i] == 'Ё') {
                 input_string[i] = 'ё';
             }
         }
@@ -56,10 +55,10 @@ int main() {
 
     std::cout << "\nТаблица регистров: \n";
 
-    for (int i = 192; i <= 223; i++)
+    for (int i = 'а'; i < 'я'; i++)
   {
     std::cout << char(i) << " = " << i << std::endl;
-    std::cout << char(i + 32) << " = " << i + 32 << std::endl;
+    std::cout << char(i + reg_delta) << " = " << i + reg_delta << std::endl;
   }
 
   std::cout << char(168) << " = " << 168 << std::endl;

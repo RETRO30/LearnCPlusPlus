@@ -10,7 +10,7 @@ namespace task2 {
         int maxNearSquare = 0;
         int minNearSquare = 0;
         for (int i = 0; i < value; i++) {
-            if (i * i > value) {
+            if (i * i >= value) {
                 maxNearSquare = i * i;
                 break;
             }
@@ -25,13 +25,13 @@ namespace task2 {
     }
 
     double overfunc(double value) {
-        return value - (int)value;
+        return (int)value - value;
     }
 
 }
 
 int main() {
-    std::cout << task2::overfunc(5) << std::endl;
+    std::cout << task2::overfunc(144) << std::endl;
     std::cout << task2::overfunc(5.5) << std::endl;
     return 0;
 }
