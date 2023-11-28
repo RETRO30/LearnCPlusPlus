@@ -19,15 +19,27 @@
 //     Все найденные слова должны быть разными.
 //
 
+const int count_valid_symbols = 44;
+const char valid_symbols[count_valid_symbols] = {'а', 'е', 'ё', 'и', 'о', 'у', 'ъ', 'ы', 'ь', 'э', 'ю', 'я',
+                                    'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м',
+                                    'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
+                                    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-'};
+
+namespace task2 {
+    bool is_valid_symbol(char symbol) {
+        for (int i = 0; i < count_valid_symbols; i++) {
+            if (symbol == valid_symbols[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+
 int main()
 {
     std::setlocale(LC_ALL, "Russian");
-
-    const int COUNT_LETTERS = 33;
-    const char alphabet[COUNT_LETTERS] = {'а', 'е', 'ё', 'и', 'о', 'у', 'ъ', 'ы', 'ь', 'э', 'ю', 'я',
-                                          'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м',
-                                          'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ'};
-    char reg_delta = 'А' - 'а';
 
     std::ifstream input_file("assets/input.txt");
     std::ifstream text_file("assets/text.txt");
@@ -43,109 +55,116 @@ int main()
     input_file.close();
 
     std::string max_words[10] = {"", "", "", "", "", "", "", "", "", ""};
-    std::string word = "";
+    std::string word;
     bool is_letter;
     bool word_in_words;
-    bool flag;
-    char symbol;
+    bool is_valid_word;
+    bool is_all_num;
 
-    int count_letters_in_word[COUNT_LETTERS];
+    int count_symbols_in_word[count_valid_symbols];
 
-    for (int i = 0; i < COUNT_LETTERS; i++)
-    {
-        count_letters_in_word[i] = 0;
+    for (int i = 0; i < count_valid_symbols; i++) {
+        count_symbols_in_word[i] = 0;
     }
 
-    int i = 0;
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    // для консоли
-    // while (symbol != '\n')
-    // {
-    //     symbol = std::cin.get();
-    // для файла
-    while (!text_file.eof())
-    {
-        text_file.get(symbol);
-        is_letter = false;
-        for (int j = 0; j < COUNT_LETTERS; j++)
-        {
-            if (symbol == alphabet[j] || symbol == (alphabet[j] + reg_delta) || symbol == 'Ё')
-            {
-                is_letter = true;
+
+    while (text_file >> word) {
+        for (int i = 0; i < word.length(); i++) {
+            word[i] = tolower(word[i]);
+        }
+
+        is_all_num = true;
+        for (int i = 0; i < word.length(); i++) {
+            if (!isdigit(word[i]) && word[i] != '-') {
+                is_all_num = false;
                 break;
             }
         }
-        if (is_letter)
-        {
-            while (is_letter)
-            {
-                is_letter = false;
-                for (int j = 0; j < COUNT_LETTERS; j++)
-                {
-                    if (symbol == alphabet[j] || symbol == (alphabet[j] + reg_delta) || symbol == 'Ё')
-                    {
-                        word += symbol;
-                        count_letters_in_word[j]++;
-                        // для консоли
-                        // symbol = std::cin.get();
-                        // для файла
-                        text_file.get(symbol);
-                        is_letter = true;
-                        break;
+
+        if (!is_all_num) {
+            while (word.length() > 0 && (!task2::is_valid_symbol(word[word.length() - 1]) || isdigit(word[word.length() - 1]) || word[word.length() - 1] == '-')) {
+                word.erase(word.length() - 1, 1);
+            } 
+        }
+        else {
+            while (word.length() > 0 && (!task2::is_valid_symbol(word[word.length() - 1]) || word[word.length() - 1] == '-')) {
+                word.erase(word.length() - 1, 1);
+            } 
+        }
+
+        
+
+        while (word.length() > 0 && (!task2::is_valid_symbol(word[0]) || word[0] == '-')) {
+            word.erase(0, 1);
+        }
+
+
+        is_valid_word = true;
+        for (int i = 0; i < word.length(); i++) {
+            if (!task2::is_valid_symbol(word[i])) {
+                is_valid_word = false;
+                break;
+            }
+        }
+        if (is_valid_word){
+            for (int i = 0; i < word.length(); i++) {
+                for (int j = 0; j < count_valid_symbols; j++) {
+                    if (word[i] == valid_symbols[j]) {
+                        count_symbols_in_word[j]++;
                     }
                 }
             }
-            flag = false;
-            for (int j = 0; j < COUNT_LETTERS; j++)
-            {
-                if (count_letters_in_word[j] >= 3)
-                {   
-                    flag = true;
+            is_valid_word = false;
+            for (int i = 0; i < count_valid_symbols; i++) {
+                if (count_symbols_in_word[i] >= 3) {
+                    is_valid_word = true;
                     break;
                 }
             }
-            if (flag)
-            {
+            if (is_valid_word) {
                 word_in_words = false;
-                for (int j = 0; j < n; j++)
-                {
-                    if (word == max_words[j])
-                    {
-                        word_in_words = true;
-                        break;
-                    }
-                }
-                if (!word_in_words)
-                {
-                    for (int j = n; j > 0; j--)
-                    {
-                        if (word.length() > max_words[j].length())
-                        {
-                            for (int k = 0; k < j; k++)
-                            {
-                                max_words[k] = max_words[k + 1];
+                for (int i = 0; i < n; i++) {
+                    if (word.length() > max_words[i].length()) {
+                        for (int j = 0; j < n; j++) {
+                            if (word == max_words[j]) {
+                                word_in_words = true;
+                                break;
                             }
-                            max_words[j] = word;
+                        }
+                        if (!word_in_words) {
+                            for (int j = n - 1; j > i; j--) {
+                                max_words[j] = max_words[j - 1];
+                            }
+                            max_words[i] = word;
                             break;
+                        }
+                        else {
+                            word_in_words = false;
                         }
                     }
                 }
             }
-            for (int i = 0; i < COUNT_LETTERS; i++)
-            {
-                count_letters_in_word[i] = 0;
-            }
-            word = "";
+        }
+        // for (int i = 0; i < n; i++) {
+        //     if (max_words[i] != "") {
+        //         std::cout << max_words[i] << std::endl;
+        //     }
+        // }
+        for (int i = 0; i < count_valid_symbols; i++) {
+            count_symbols_in_word[i] = 0;
         }
     }
+
+
     for (int i = 0; i < n; i++) {
         if (max_words[i] != "") {
             result_file << max_words[i] << std::endl;
             std::cout << max_words[i] << std::endl;
         }
-        
     }
+
     text_file.close();
     result_file.close();
     return 0;

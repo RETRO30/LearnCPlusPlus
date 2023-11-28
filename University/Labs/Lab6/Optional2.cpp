@@ -13,7 +13,7 @@ int main() {
     const char alphabet[COUNT_LETTERS] = {'à', 'å', '¸', 'è', 'î', 'ó', 'ú', 'û', 'ü', 'ý', 'þ', 'ÿ',
                                          'á', 'â', 'ã', 'ä', 'æ', 'ç', 'é', 'ê', 'ë', 'ì',
                                             'í', 'ï', 'ð', 'ñ', 'ò', 'ô', 'õ', 'ö', '÷', 'ø', 'ù'};
-    char reg_delta = 'à' - 'À';
+    char reg_delta = 'À' - 'à';
 
     std::string WORK_FILE = "assets/optional_text.txt";
 

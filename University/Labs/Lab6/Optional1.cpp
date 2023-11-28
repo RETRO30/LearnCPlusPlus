@@ -34,7 +34,7 @@ int main() {
         case 0: {
             int multipler = 0;
             for (int i = 0; i < input_line.length(); i++) {
-                if (isalpha(input_line[i])) {
+                if (isalpha(input_line[i]) || (input_line[i] >= 'À' && input_line[i] <= 'ÿ') || input_line[i] == '¸' || input_line[i] == '¨') {
                     for (int j = 0; j < multipler; j++) {
                         result_line += input_line[i];
                     }
@@ -44,12 +44,15 @@ int main() {
                 else if (isdigit(input_line[i])) {
                     multipler = multipler * 10 + abs(input_line[i] - '0');
                 }
+                else {
+                    multipler = 0;
+                }
             }
             break;
         }        
         case 1:
             for (int i = 0; i < input_line.length(); i++) {
-                if (isalpha(input_line[i])) {
+                if (isalpha(input_line[i]) || (input_line[i] >= 'À' && input_line[i] <= 'ÿ') || input_line[i] == '¸' || input_line[i] == '¨') {
                     int counter = 1;
                     while (input_line[i] == input_line[i + 1]) {
                         counter++;

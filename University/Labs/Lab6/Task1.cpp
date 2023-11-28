@@ -61,7 +61,7 @@ int main() {
     std::cout << char(i + reg_delta) << " = " << i + reg_delta << std::endl;
   }
 
-  std::cout << char(168) << " = " << 168 << std::endl;
+  std::cout << 'à' << " = " << (int)('à') << std::endl;
   std::cout << char(184) << " = " << 184 << std::endl;
 
   for (int i = 33; i <= 47; i++)
