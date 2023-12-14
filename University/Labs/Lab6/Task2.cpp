@@ -69,7 +69,7 @@ int main()
 
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-
+    // while (std::cin >> word) {
     while (text_file >> word) {
         for (int i = 0; i < word.length(); i++) {
             word[i] = tolower(word[i]);

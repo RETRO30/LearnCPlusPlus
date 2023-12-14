@@ -21,8 +21,12 @@ int n;
 
 namespace task1 {
 
-    void readMatrix() {
+    bool readMatrix() {
         std::ifstream file("assets/input.txt");
+        if (!file.is_open()) {
+            std::cout << "File not found" << std::endl;
+            return false;
+        }
         file >> n;
         std::cout << n << std::endl;
         for (int i = 0; i < n; i++) {
@@ -30,16 +34,24 @@ namespace task1 {
                 file >> matrix[i][j];
             }
         }
+        file.close();
+        return true;
     }
 
-    void writeMatrix() {
+    bool writeMatrix() {
         std::ofstream file("assets/output.txt");
+        if (!file.is_open()) {
+            std::cout << "File couldn't open" << std::endl;
+            return false;
+        }
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 file << matrix[i][j] << " ";
             }
             file << std::endl;
         }
+        file.close();
+        return true;
     }
 
     bool isMaxInRow(int value, int i) {
@@ -52,6 +64,7 @@ namespace task1 {
     }
 
     bool zeroInNum(int value) {
+        value = abs(value);
         while (value > 0) {
             if (value % 10 == 0) {
                 return true;
@@ -82,9 +95,19 @@ namespace task1 {
 }
 
 int main() {
-    task1::readMatrix();
+    bool all_correct = false;
+    all_correct = task1::readMatrix();
+    if (!all_correct) {
+        std::cout << "Error while reading file";
+        return 0;
+    }
     task1::editMatrix();
-    task1::writeMatrix();
+    
+    all_correct = task1::writeMatrix();
+
+    if (!all_correct) {
+        std::cout << "Error while writing file";
+    }
     return 0;
 }
 

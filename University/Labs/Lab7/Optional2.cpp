@@ -1,7 +1,5 @@
 #include <iostream>
 
-#include <iostream>
-
 void simple_divs(int num, int divisor) {
     if (num <= 1) {
         return;
