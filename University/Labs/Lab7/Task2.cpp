@@ -25,15 +25,19 @@ namespace task2 {
     }
 
     double overfunc(double value) {
-        int integerPart = ((int)value / 1) < 0 ? ((int)value / 1) - 1 : ((int)value / 1);
-        double fractionalPart = value - ((int)value);
+        int integerPart = (int)value;
+        if (integerPart < 0 && value - integerPart != 0) {
+            integerPart--;
+        }
+        double fractionalPart = value - integerPart;
+        std::cout << integerPart << " " << fractionalPart << std::endl;
         return integerPart - fractionalPart;
     }
 
 }
 
 int main() {
-    std::cout << task2::overfunc(23) << std::endl;
-    std::cout << task2::overfunc(-5.2) << std::endl;
+    std::cout << task2::overfunc(17) << std::endl;
+    std::cout << task2::overfunc(-0.0) << std::endl;
     return 0;
 }

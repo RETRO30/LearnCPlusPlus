@@ -8,12 +8,12 @@
 
 #include <iostream>
 
-double norm(int **MATRIX, int M, int N){
-    double norm = 0;
+int norm(int **MATRIX, int M, int N){
+    int norm = INT_MIN;
     for (int i = 0; i < M; i++){
-        double sum = 0;
+        int sum = 0;
         for (int j = 0; j < N; j++){
-            sum += MATRIX[i][j];
+            sum += abs(MATRIX[i][j]);
         }
         if (sum > norm){
             norm = sum;
@@ -22,12 +22,28 @@ double norm(int **MATRIX, int M, int N){
     return norm;
 }
 
+void PrintMatrix(int **MATRIX, int M, int N){
+    for (int i = 0; i < M; i++){
+        for (int j = 0; j < N; j++){
+            std::cout << MATRIX[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
 int main(){
     int M, N;
     std::cout << "Enter M: ";
     std::cin >> M;
     std::cout << "Enter N: ";
     std::cin >> N;
+
+    if (N < 0 || M < 0){
+        std::cout << "Error: N or M < 0" << std::endl;
+        system("pause");
+        return 0;
+    }
+
     int **A = new int*[M];
     for (int i = 0; i < M; i++){
         A[i] = new int[N];
@@ -47,19 +63,9 @@ int main(){
         }
     }
     std::cout << "A: " << std::endl;
-    for (int i = 0; i < M; i++){
-        for (int j = 0; j < N; j++){
-            std::cout << A[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
+    PrintMatrix(A, M, N);
     std::cout << "B: " << std::endl;
-    for (int i = 0; i < N; i++){
-        for (int j = 0; j < M; j++){
-            std::cout << B[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
+    PrintMatrix(B, N, M);
     std::cout << "Norm A: " << norm(A, M, N) << std::endl;
     std::cout << "Norm B: " << norm(B, N, M) << std::endl;
     std::cout << "Norm A - Norm B: " << norm(A, M, N) - norm(B, N, M) << std::endl;
@@ -69,4 +75,6 @@ int main(){
     for (int i = 0; i < N; i++){
         delete[] B[i];
     }
+    delete [] A;
+    delete [] B; 
 }

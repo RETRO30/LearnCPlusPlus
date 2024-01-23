@@ -17,11 +17,18 @@
 // Вариант 7
 // Если среди новых чисел не встретилась 1, заменить последнее на 999.
 int task1(){
-    int K = 10;
+    int K;
+    std::cout << "Enter K: ";
+    std::cin >> K;
+    if (K < 0) {
+        std::cout << "Error: K < 0" << std::endl; 
+        system("pause");
+        return 0;
+    }
     int S;
     int *A = (int*)malloc(K*sizeof(int));
     for (int i = 0; i < K; i++){
-        A[i] = i;
+        A[i] = i+1;
     }
     std::cout << "Enter S: ";
     std::cin >> S;
@@ -182,7 +189,7 @@ int dop2(){
 
 int main(){
     task1();
-    dop1();
-    dop2();
+    // dop1();
+    // dop2();
    return 0;
 }
